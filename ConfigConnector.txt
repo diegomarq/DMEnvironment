@@ -1,4 +1,5 @@
 ## From: https://www.codementor.io/sheena/installing-cassandra-spark-linux-debian-ubuntu-14-du107vbhx
+## From: https://coderwall.com/p/o9bkjg/setup-spark-with-cassandra-connector
 
 ## Download connector
 git clone https://github.com/datastax/spark-cassandra-connector.git
@@ -28,3 +29,20 @@ sudo sbt assembly -Dscala-2.11=true
 ## Pyspark config to access spark cassandra connection
 ## https://stackoverflow.com/questions/42607183/spark-with-cassandra-python-setup
 ## https://stackoverflow.com/questions/37082562/how-to-connect-spark-with-cassandra-using-spark-cassandra-connector
+
+## Copy .jar generated
+cp spark-cassandra-connector/target/full/scala-2.10/spark-cassandra-connector-assembly-2.0.0-M2.jar
+
+## Paste copy .jar into /etc/spark/spark-2.2.0-bin-hadoop2.7/jars/
+
+## start master
+/etc/spark/spark-2.2.0-bin-hadoop2.7/sbin/start-master.sh  --host 0.0.0.0
+
+## start slave
+/etc/spark/spark-2.2.0-bin-hadoop2.7/bin/start-slave.sh  --host 0.0.0.0 spark://127.0.0.1:7077
+
+## start shell
+/etc/spark/spark-2.2.0-bin-hadoop2.7/bin/spark-shell --driver-class-path $(echo /etc/spark/spark-2.2.0-bin-hadoop2.7/jars/*.jar |sed 's/ /:/g')
+
+## Include this package in your Spark Applications:
+spark-shell --packages datastax:spark-cassandra-connector:2.0.5-s_2.11

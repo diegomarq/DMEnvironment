@@ -1,0 +1,17 @@
+## From: https://www.youtube.com/watch?v=dhzNJnSeiN4
+
+## run as system_auth keyspace
+sudo service cassandra start
+use system_auth.keyspaces;
+
+## Create Table
+create table t_modelar_noticia_classificacao(
+    codigo text primary key,
+    titulo text,
+    resumo text, 
+    conteudo text,
+    classificacao text);
+
+## Copy csv into table
+copy t_modelar_noticia_classificacao(codigo, titulo, resumo, conteudo, classificacao) from '/home/diego/Documents/Data/noticia_tit_res_cont_clas.csv' with delimiter=';' and header=true
+
