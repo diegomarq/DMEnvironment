@@ -1,0 +1,30 @@
+## From: https://www.codementor.io/sheena/installing-cassandra-spark-linux-debian-ubuntu-14-du107vbhx
+
+## Download connector
+git clone https://github.com/datastax/spark-cassandra-connector.git
+cd spark-cassandra-connector
+git checkout v2.0.0-M2
+
+## Settings exemple
+https://support.instaclustr.com/hc/en-us/articles/213097877-Getting-Started-with-Instaclustr-Spark-Cassandra
+
+## Download sbt to build version
+echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823
+sudo apt-get install apt-transport-https -y
+sudo apt-get update -y
+sudo apt-get install sbt -y
+
+# scala 2.11 required for cassandra spark connector
+sudo wget http://downloads.lightbend.com/scala/2.11.7/scala-2.11.7.deb
+sudo dpkg -i scala-2.11.7.deb
+
+# Build project
+sudo sbt assembly -Dscala-2.11=true
+
+## Using jupyter notebook
+## https://medium.com/@amirziai/running-pyspark-with-cassandra-in-jupyter-2bf5e95c319
+
+## Pyspark config to access spark cassandra connection
+## https://stackoverflow.com/questions/42607183/spark-with-cassandra-python-setup
+## https://stackoverflow.com/questions/37082562/how-to-connect-spark-with-cassandra-using-spark-cassandra-connector

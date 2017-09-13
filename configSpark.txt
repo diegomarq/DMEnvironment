@@ -1,0 +1,21 @@
+## From: http://spark.apache.org/downloads.html
+## From: https://www.tutorialspoint.com/apache_spark/apache_spark_installation.htm
+
+## Spark
+## Download tar
+## Extract
+
+## Mode to etc, where cassandra is instaled (i prefer)
+sudo su
+mv spark-2.2.0-bin-hadoop2.7 /etc/spark/spark-2.2.0-bin-hadoop2.7/bin
+
+## Modify bashrc
+export PATH="$PATH:/etc/spark/spark-2.2.0-bin-hadoop2.7/bin"
+
+source ~/.bashrc 
+
+## Run shell
+spark-shell
+
+
+
